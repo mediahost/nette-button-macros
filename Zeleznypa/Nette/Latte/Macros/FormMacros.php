@@ -2,13 +2,13 @@
 
 namespace Zeleznypa\Nette\Latte\Macros;
 
-use Nette\Latte;
+use Latte;
 
 /**
  * Some new nette form latte macros
  * @author Pavel Železný <info@pavelzelezny.cz>
  */
-class FormMacros extends \Nette\Latte\Macros\MacroSet
+class FormMacros extends Latte\Macros\MacroSet
 {
 
 	/**
@@ -18,7 +18,6 @@ class FormMacros extends \Nette\Latte\Macros\MacroSet
 	 */
 	public static function install(Latte\Compiler $compiler)
 	{
-		parent::install($compiler);
 		$me = new static($compiler);
 		$me->addMacro('button', array($me, 'macroButton'), array($me, 'macroButtonEnd'));
 		$me->addMacro('caption', array($me, 'macroCaption'));
@@ -27,11 +26,11 @@ class FormMacros extends \Nette\Latte\Macros\MacroSet
 	/**
 	 * Renders button beggining tag
 	 * @author Pavel Železný <info@pavelzelezny.cz>
-	 * @param \Nette\Latte\MacroNode $node
-	 * @param \Nette\Latte\PhpWriter $writer
+	 * @param Latte\MacroNode $node
+	 * @param Latte\PhpWriter $writer
 	 * @return void
 	 */
-	public function macroButton(\Nette\Latte\MacroNode $node, \Nette\Latte\PhpWriter $writer)
+	public function macroButton(Latte\MacroNode $node, Latte\PhpWriter $writer)
 	{
 		$code = '$_input = (is_object(%node.word) ? %node.word : $_form[%node.word]);';
 		$code .= '$_attributes[$_input->getName()] = %node.array;';
@@ -47,11 +46,11 @@ class FormMacros extends \Nette\Latte\Macros\MacroSet
 	/**
 	 * Renders button end tag
 	 * @author Pavel Železný <info@pavelzelezny.cz>
-	 * @param \Nette\Latte\MacroNode $node
-	 * @param \Nette\Latte\PhpWriter $writer
+	 * @param Latte\MacroNode $node
+	 * @param Latte\PhpWriter $writer
 	 * @return void
 	 */
-	public function macroButtonEnd(\Nette\Latte\MacroNode $node, \Nette\Latte\PhpWriter $writer)
+	public function macroButtonEnd(Latte\MacroNode $node, Latte\PhpWriter $writer)
 	{
 		$code = 'echo $_buttonControl->endTag();';
 		$code .= 'unset($_buttonControl);';
@@ -65,11 +64,11 @@ class FormMacros extends \Nette\Latte\Macros\MacroSet
 	/**
 	 * Render button caption
 	 * @author Pavel Železný <info@pavelzelezny.cz>
-	 * @param \Nette\Latte\MacroNode $node
-	 * @param \Nette\Latte\PhpWriter $writer
+	 * @param Latte\MacroNode $node
+	 * @param Latte\PhpWriter $writer
 	 * @return void
 	 */
-	public function macroCaption(\Nette\Latte\MacroNode $node, \Nette\Latte\PhpWriter $writer)
+	public function macroCaption(Latte\MacroNode $node, Latte\PhpWriter $writer)
 	{
 		if ($node->args !== '')
 		{
